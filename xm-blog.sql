@@ -80,8 +80,8 @@ UNLOCK TABLES;
 # Dump of table admin
 # ------------------------------------------------------------
 
-
-
+UNLOCK TABLES;
+LOCK TABLES `admin` WRITE;
 DROP TABLE IF EXISTS `admin`;
 
 CREATE TABLE `admin` (
@@ -95,8 +95,8 @@ CREATE TABLE `admin` (
                          `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Email',
                          PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC COMMENT='admin';
-SHOW TABLES LIKE 'admin';
 
+LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 
 INSERT INTO `admin` (`id`, `username`, `password`, `name`, `avatar`, `role`, `phone`, `email`)
@@ -140,6 +140,8 @@ UNLOCK TABLES;
 # Dump of table category
 # ------------------------------------------------------------
 
+UNLOCK TABLES;
+LOCK TABLES `category` WRITE;
 DROP TABLE IF EXISTS `category`;
 
 CREATE TABLE `category` (
@@ -297,7 +299,12 @@ LOCK TABLES `user` WRITE;
 
 INSERT INTO `user` (`id`, `username`, `password`, `name`, `avatar`, `role`, `sex`, `phone`, `email`, `info`, `birth`)
 VALUES
-
+    (4,'ccc','123','Andony','http://localhost:9090/files/1702263503066-微信截图_20231114162559.png','USER','Female','1398899778',NULL,'I am a good person and handsome.',NULL),
+    (5,'aaa','123','aaa','http://localhost:9090/files/1702263511014-微信截图_20231018172251.png','USER',NULL,'13899887788','aaa@xm.com','',NULL),
+    (9,'vvv','123','vvv','http://localhost:9090/files/1701672091418-微信截图_20231114162516.png','USER','Male','13988776689','vvv@xm.com','You can add me.','2000-12-01'),
+    (10,'acc','123','acc','http://localhost:9090/files/1702263517115-微信截图_20231018172452.png','USER',NULL,NULL,NULL,NULL,NULL),
+    (11,'abc','1234','abc','http://localhost:9090/files/1701745246171-微信截图_20231114162404.png','USER',NULL,'13899887799',NULL,NULL,NULL),
+    (12,'aff','123','aff','http://localhost:9090/files/1702376508412-微信截图_20231018172452.png','USER',NULL,NULL,NULL,NULL,NULL),
     (13,'test','123456','test',NULL,'USER',NULL,NULL,NULL,NULL,NULL);
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;

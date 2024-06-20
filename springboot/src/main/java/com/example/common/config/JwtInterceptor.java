@@ -49,11 +49,11 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
         Account account = null;
         try {
-
+//Parse the token to retrieve the stored data".
             String userRole = JWT.decode(token).getAudience().get(0);
             String userId = userRole.split("-")[0];
             String role = userRole.split("-")[1];
-
+//search by userID in database
             if (RoleEnum.ADMIN.name().equals(role)) {
                 account = adminService.selectById(Integer.valueOf(userId));
             } else if (RoleEnum.USER.name().equals(role)) {

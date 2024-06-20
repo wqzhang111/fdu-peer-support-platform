@@ -33,7 +33,7 @@ public class UserService {
         }
         // 2. Check if the user password is empty.
         if (ObjectUtil.isEmpty(user.getPassword())) {
-            user.setPassword(Constants.USER_DEFAULT_PASSWORD); // 默认密码 123
+            user.setPassword(Constants.USER_DEFAULT_PASSWORD);
         }
         // 3. Check if the user name is empty.
         if (ObjectUtil.isEmpty(user.getName())) {
@@ -71,7 +71,9 @@ public class UserService {
         List<User> list = userMapper.selectAll(user);
         return PageInfo.of(list);
     }
-
+    /**
+     * Log in
+     */
     public Account login(Account account) {
         Account dbUser = userMapper.selectByUsername(account.getUsername());
         if (ObjectUtil.isNull(dbUser)) {
@@ -80,7 +82,7 @@ public class UserService {
         if (!account.getPassword().equals(dbUser.getPassword())) {
             throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
         }
-
+    //generate a token
         String tokenData = dbUser.getId() + "-" + RoleEnum.USER.name();
         String token = TokenUtils.createToken(tokenData, dbUser.getPassword());
         dbUser.setToken(token);

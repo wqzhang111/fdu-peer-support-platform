@@ -72,7 +72,7 @@ export default {
     }
   },
   created() {
-    if (!this.user.id || this.user.role !== 'ADMIN') {
+    if (!this.user.id || this.user.role !== 'ADMIN') {//only admin could log into admin page
       this.$router.push('/login')
     }
   },

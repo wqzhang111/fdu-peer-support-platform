@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Identify from "@/components/Identify";
+import Identify from "@/components/Identify"; //import identify to login page
 
 export default {
   name: "Login",
@@ -62,11 +62,11 @@ export default {
   mounted() {
     this.refreshCode()
   },
-  methods: {
+  methods: { //refresh code
     refreshCode() {
       this.identifyCode = ''
       this.makeCode(this.identifyCodes, 4)
-    },
+    },//create random code
     makeCode(o, l) {
       for (let i = 0; i < l; i++) {
         this.identifyCode += this.identifyCodes[Math.floor(Math.random() * (this.identifyCodes.length))]
@@ -84,7 +84,7 @@ export default {
         return
       }
       this.$refs['formRef'].validate((valid) => {
-        if (valid) {
+        if (valid) {//successful
           this.$request.post('/login', this.form).then(res => {
             if (res.code === '200') {
               localStorage.setItem("xm-user", JSON.stringify(res.data))
@@ -96,7 +96,7 @@ export default {
                 } else {
                   location.href = '/front/home'
                 }
-              }, 500)
+              }, 500)//wrong code
             } else {
               this.refreshCode()
               this.$message.error(res.msg)

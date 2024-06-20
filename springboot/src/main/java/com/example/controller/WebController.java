@@ -6,6 +6,7 @@ import com.example.common.Result;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
+import com.example.service.AdminService;
 import com.example.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,8 @@ import javax.annotation.Resource;
 @RestController
 public class WebController {
 
+    @Resource
+    private AdminService adminService;
 
     @Resource
     private UserService userService;
@@ -36,7 +39,7 @@ public class WebController {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
-           // account = adminService.login(account);
+            account = adminService.login(account);
         } else if (RoleEnum.USER.name().equals(account.getRole())) {
             account = userService.login(account);
         } else {
@@ -72,7 +75,7 @@ public class WebController {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
-           // adminService.updatePassword(account);
+            adminService.updatePassword(account);
         } else if (RoleEnum.USER.name().equals(account.getRole())) {
             userService.updatePassword(account);
         }

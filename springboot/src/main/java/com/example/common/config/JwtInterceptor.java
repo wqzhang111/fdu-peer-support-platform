@@ -10,6 +10,7 @@ import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.exception.CustomException;
+import com.example.service.AdminService;
 import com.example.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +30,9 @@ public class JwtInterceptor implements HandlerInterceptor {
     private static final Logger log = LoggerFactory.getLogger(JwtInterceptor.class);
 
     @Resource
-    //private AdminService adminService;
+    private AdminService adminService;
 
-    //@Resource
+    @Resource
     private UserService userService;
 
     @Override
@@ -54,7 +55,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             String role = userRole.split("-")[1];
 
             if (RoleEnum.ADMIN.name().equals(role)) {
-              //  account = adminService.selectById(Integer.valueOf(userId));
+                account = adminService.selectById(Integer.valueOf(userId));
             } else if (RoleEnum.USER.name().equals(role)) {
                 account = userService.selectById(Integer.valueOf(userId));
             }

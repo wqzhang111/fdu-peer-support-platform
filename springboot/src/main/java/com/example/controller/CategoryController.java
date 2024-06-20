@@ -1,25 +1,29 @@
 package com.example.controller;
 
 import com.example.common.Result;
-import com.example.entity.Admin;
-import com.example.entity.User;
-import com.example.service.UserService;
+import com.example.entity.Category;
+import com.example.service.CategoryService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * category front-end interface
+ **/
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/category")
+public class CategoryController {
 
     @Resource
-    private UserService userService;
+    private CategoryService categoryService;
 
+    /**
+     * add
+     */
     @PostMapping("/add")
-    public Result add(@RequestBody User user) {
-        userService.add(user);
+    public Result add(@RequestBody Category category) {
+        categoryService.add(category);
         return Result.success();
     }
 
@@ -28,7 +32,7 @@ public class UserController {
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
-        userService.deleteById(id);
+        categoryService.deleteById(id);
         return Result.success();
     }
 
@@ -36,8 +40,8 @@ public class UserController {
      * batch delete
      */
     @DeleteMapping("/delete/batch")
-    public Result deleteBatch(@RequestBody List<Integer> ids) {  //  [1,2,3]
-        userService.deleteBatch(ids);
+    public Result deleteBatch(@RequestBody List<Integer> ids) {
+        categoryService.deleteBatch(ids);
         return Result.success();
     }
 
@@ -45,37 +49,37 @@ public class UserController {
      * update
      */
     @PutMapping("/update")
-    public Result updateById(@RequestBody User user) {
-        userService.updateById(user);
+    public Result updateById(@RequestBody Category category) {
+        categoryService.updateById(category);
         return Result.success();
     }
 
     /**
-     * search by id
+     * search by ID
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
-        User user = userService.selectById(id);
-        return Result.success(user);
+        Category category = categoryService.selectById(id);
+        return Result.success(category);
     }
 
     /**
-     * search all
+     * select all
      */
     @GetMapping("/selectAll")
-    public Result selectAll(User user) {
-        List<User> list = userService.selectAll(user);
+    public Result selectAll(Category category) {
+        List<Category> list = categoryService.selectAll(category);
         return Result.success(list);
     }
 
     /**
-     * select page
+     * selete Page
      */
     @GetMapping("/selectPage")
-    public Result selectPage(User user,
+    public Result selectPage(Category category,
                              @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<User> page = userService.selectPage(user, pageNum, pageSize);
+        PageInfo<Category> page = categoryService.selectPage(category, pageNum, pageSize);
         return Result.success(page);
     }
 

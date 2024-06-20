@@ -18,8 +18,11 @@ const routes = [
       { path: '403', name: 'NoAuth', meta: { name: 'No Permission' }, component: () => import('../views/manager/403') },
       { path: 'home', name: 'Home', meta: { name: 'Home Page' }, component: () => import('../views/manager/Home') },
       { path: 'admin', name: 'Admin', meta: { name: 'Admin Info' }, component: () => import('../views/manager/Admin') },
+      { path: 'adminPerson', name: 'AdminPerson', meta: { name: 'Personal Info' }, component: () => import('../views/manager/AdminPerson') },
+      { path: 'password', name: 'Password', meta: { name: 'Change Password' }, component: () => import('../views/manager/Password') },
       { path: 'user', name: 'User', meta: { name: 'User Info' }, component: () => import('../views/manager/User') },
       { path: 'category', name: 'Category', meta: { name: 'Post Category' }, component: () => import('../views/manager/Category') },
+      { path: 'post', name: 'Post', meta: { name: 'Post Info' }, component: () => import('../views/manager/Post') },
     ]
   },
   {
@@ -28,7 +31,9 @@ const routes = [
     component: () => import('../views/Front.vue'),
     children: [
       { path: 'home', name: 'FHome', meta: { name: 'Home Page' }, component: () => import('../views/front/Home') },
-
+      { path: 'person', name: 'Person', meta: { name: 'Personal Info' }, component: () => import('../views/front/Person') },
+      { path: 'postDetail', name: 'PostDetail', meta: { name: 'Post Details' }, component: () => import('../views/front/PostDetail') },
+      { path: 'newPost', name: 'NewPost', meta: { name: 'Post Edit' }, component: () => import('../views/front/NewPost') },
     ]
   },
   { path: '/login', name: 'Login', meta: { name: 'Login' }, component: () => import('../views/Login.vue') },

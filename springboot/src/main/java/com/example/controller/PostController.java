@@ -56,4 +56,45 @@ public class PostController {
         return Result.success();
     }
 
+    /**
+     * search by ID
+     */
+    @GetMapping("/selectById/{id}")
+    public Result selectById(@PathVariable Integer id) {
+        Post post = postService.selectById(id);
+        return Result.success(post);
+    }
+
+    /**
+     * Search all
+     */
+    @GetMapping("/selectAll")
+    public Result selectAll(Post post) {
+        List<Post> list = postService.selectAll(post);
+        return Result.success(list);
+    }
+
+
+    /**
+     * search by page in the postlist
+     */
+    @GetMapping("/selectPage")
+    public Result selectPage(Post post,
+                             @RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<Post> page = postService.selectPage(post, pageNum, pageSize);
+        return Result.success(page);
+    }
+
+    /**
+     * search from postlist
+     */
+    @GetMapping("/selectUser")
+    public Result selectUser(Post post,
+                             @RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<Post> page = postService.selectUser(post, pageNum, pageSize);
+        return Result.success(page);
+    }
+
 }
